@@ -37,6 +37,7 @@ public class CloneAttack : MonoBehaviour
         slashPoint.localPosition = new Vector3(offsetX * cloneDir, offsetY, 0);
 
         GameObject slash = Instantiate(slashPrefab, slashPoint.position, Quaternion.identity);
+        slash.transform.SetParent(slashPoint);
 
         SlashEffect effect = slash.GetComponent<SlashEffect>();
         effect.Setup(cloneDir);
