@@ -8,19 +8,24 @@ public class SlashHitbox : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Enemy enemy = other.GetComponent<Enemy>();
-        if (enemy != null)
+        if (other.GetComponent<Shield>() != null)
         {
-            Vector2 dir = (other.transform.position - transform.position).normalized;
-            enemy.TakeDamage(damage, dir);
             return;
         }
 
-        PlayerHealth player = other.GetComponent<PlayerHealth>();
-        if (player != null)
+        Enemy enemy = other.GetComponent<Enemy>();
+        if (enemy != null)
         {
-            Vector2 dir = (other.transform.position - transform.position).normalized;
-            player.TakeDamage(damage, dir);
+            Vector2 attackDir = other.transform.position - transform.parent.position;
+            enemy.TakeDamage(damage, attackDir);
+            return;
+        }
+
+        PlayerHealth ph = other.GetComponent<PlayerHealth>();
+        if (ph != null)
+        {
+            ph.TakeDamage(damage);
         }
     }
+
 }
