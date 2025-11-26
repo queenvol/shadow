@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3681208047561887923}
   - component: {fileID: 1216846348252546853}
   - component: {fileID: 8706366252239469874}
+  - component: {fileID: 584750300713278595}
   m_Layer: 0
   m_Name: ShadowClone
   m_TagString: Untagged
@@ -162,3 +163,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+--- !u!114 &584750300713278595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329438844669829283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cf9f74c288ea9441aa465ee11d28c80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slashPrefab: {fileID: 4762105506908533621, guid: 5f7520235cc47bf4dbdcd606db7b46d4, type: 3}
+  offsetX: 0.3
+  offsetY: 0
+  slashDuration: 0.15

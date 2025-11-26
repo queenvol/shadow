@@ -229,6 +229,8 @@ GameObject:
   - component: {fileID: 1420205315}
   - component: {fileID: 1420205316}
   - component: {fileID: 1420205317}
+  - component: {fileID: 1420205318}
+  - component: {fileID: 1420205319}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -395,6 +397,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  cloneLifetime: 3
+  summonCooldown: 5
 --- !u!114 &1420205317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,6 +409,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f5ac9e744cd3ef46af30c1e3c555be0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1420205318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420205310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9182eee3a8b2ecf4eab26248629ba036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slashPrefab: {fileID: 4762105506908533621, guid: 5f7520235cc47bf4dbdcd606db7b46d4, type: 3}
+  offsetX: 0.3
+  offsetY: 0
+  slashDuration: 0.15
+--- !u!114 &1420205319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420205310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3453eaf480351c4ca759af1f25c7deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1876686495
