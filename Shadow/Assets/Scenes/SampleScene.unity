@@ -227,6 +227,8 @@ GameObject:
   - component: {fileID: 1420205312}
   - component: {fileID: 1420205311}
   - component: {fileID: 1420205315}
+  - component: {fileID: 1420205316}
+  - component: {fileID: 1420205317}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -376,6 +378,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+--- !u!114 &1420205316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420205310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d69dbecf0a9baa45845911681deff5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clonePrefab: {fileID: 1329438844669829283, guid: fd1cf11ae94924f42805c035c50b68e6, type: 3}
+  summonRadius: 5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!114 &1420205317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420205310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f5ac9e744cd3ef46af30c1e3c555be0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1876686495
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,7 +418,7 @@ GameObject:
   - component: {fileID: 1876686498}
   - component: {fileID: 1876686497}
   - component: {fileID: 1876686496}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}

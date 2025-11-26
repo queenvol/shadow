@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class CloneMovement : MonoBehaviour
 {
-    [Header("Movement")]
     public float moveSpeed = 6f;
 
     private PlayerInputActions input;
@@ -17,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         input = new PlayerInputActions();
+
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponentInChildren<SpriteRenderer>();
 
@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnMove(InputAction.CallbackContext ctx)
     {
-        moveInput = ctx.ReadValue<float>();
+        moveInput = -ctx.ReadValue<float>();
 
         if (moveInput != 0)
             sr.flipX = moveInput < 0;
