@@ -46,17 +46,27 @@ public class ShadowManager : MonoBehaviour
         float castHeight = transform.position.y + 5f;
         Vector2 castOrigin = new Vector2(targetX, castHeight);
 
-        RaycastHit2D hit = Physics2D.Raycast(
+        RaycastHit2D[] hits = Physics2D.RaycastAll(
             castOrigin,
             Vector2.down,
             20f,
             groundLayer
         );
 
-        if (!hit)
+        if (hits.Length == 0)
             return;
 
-        Vector2 spawnPos = new Vector2(targetX, hit.point.y);
+        RaycastHit2D bestHit = hits[0];
+
+        foreach (RaycastHit2D h in hits)
+        {
+            if (Mathf.Abs(h.point.y - mouseWorld.y) < Mathf.Abs(bestHit.point.y - mouseWorld.y))
+            {
+                bestHit = h;
+            }
+        }
+
+        Vector2 spawnPos = new Vector2(targetX, bestHit.point.y);
 
         clone = Instantiate(clonePrefab, spawnPos, Quaternion.identity).transform;
 
