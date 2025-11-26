@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4650397378086391981}
   - component: {fileID: 8816716501288054494}
   m_Layer: 0
-  m_Name: SlashPivot
+  m_Name: PlayerSlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -193,3 +193,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ffcd48db2523546bf5ca40b3be693f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1

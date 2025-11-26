@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDummy : MonoBehaviour, Enemy
+public class PlayerHealth : MonoBehaviour
 {
-    [Header("Stats")]
     public int maxHP = 5;
     private int currentHP;
 
@@ -15,20 +14,22 @@ public class EnemyDummy : MonoBehaviour, Enemy
     private SpriteRenderer sr;
     private Color originalColor;
     private bool isFlashing = false;
+    private Rigidbody2D rb;
 
     void Start()
     {
         currentHP = maxHP;
-        sr = GetComponent<SpriteRenderer>();
+        sr = GetComponentInChildren<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
         originalColor = sr.color;
     }
 
-    public void TakeDamage(int damage, Vector2 hitDirection)
+    public void TakeDamage(int damage, Vector2 hitDir)
     {
         currentHP -= damage;
 
         HitFlash();
-        Knockback(hitDirection);
+        Knockback(hitDir);
 
         if (currentHP <= 0)
         {
@@ -36,9 +37,9 @@ public class EnemyDummy : MonoBehaviour, Enemy
         }
     }
 
-    void Die()
+    public void TakeDamage(int damage)
     {
-        Destroy(gameObject);
+        TakeDamage(damage, Vector2.zero);
     }
 
     void HitFlash()
@@ -51,18 +52,25 @@ public class EnemyDummy : MonoBehaviour, Enemy
     {
         isFlashing = true;
         sr.color = Color.red;
+
         yield return new WaitForSeconds(flashDuration);
+
         sr.color = originalColor;
         isFlashing = false;
     }
 
     void Knockback(Vector2 dir)
     {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (rb != null)
-        {
-            rb.velocity = Vector2.zero;
+        if (rb == null) return;
+
+        rb.velocity = Vector2.zero;
+
+        if (dir != Vector2.zero)
             rb.AddForce(dir.normalized * knockbackForce, ForceMode2D.Impulse);
-        }
+    }
+
+    void Die()
+    {
+        Debug.Log("Player Dead");
     }
 }
