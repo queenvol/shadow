@@ -58,8 +58,12 @@ public class PlayerHealth : MonoBehaviour
 
         rb.velocity = Vector2.zero;
 
-        if (dir != Vector2.zero)
-            rb.AddForce(dir.normalized * knockbackForce, ForceMode2D.Impulse);
+        float x = Mathf.Sign(dir.x);
+        if (x == 0) return;
+
+        Vector2 horizontal = new Vector2(x, 0f);
+
+        rb.AddForce(horizontal * knockbackForce, ForceMode2D.Impulse);
     }
 
     void Die()

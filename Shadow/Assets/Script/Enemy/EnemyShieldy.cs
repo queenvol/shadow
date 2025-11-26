@@ -74,8 +74,8 @@ public class EnemyShieldy : EnemyBase
 
     bool IsFrontBlocked(Vector2 attackDir)
     {
-        float facing = Mathf.Sign(transform.right.x);
-        float attackSide = Mathf.Sign(attackDir.x);
+        float facing = Mathf.Sign(transform.localScale.x);
+        float attackSide = Mathf.Sign(-attackDir.x);
         return facing == attackSide;
     }
 
