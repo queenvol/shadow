@@ -21,20 +21,21 @@ public class PlayerHealth : MonoBehaviour
         currentHP = maxHP;
         sr = GetComponentInChildren<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
-        originalColor = sr.color;
+        if (sr != null)
+            originalColor = sr.color;
     }
 
     public void TakeDamage(int damage, Vector2 hitDir)
     {
         currentHP -= damage;
 
-        HitFlash();
-        Knockback(hitDir);
+        if (!isFlashing && sr != null)
+            StartCoroutine(HitFlashRoutine());
+
+        ApplyKnockback(hitDir);
 
         if (currentHP <= 0)
-        {
             Die();
-        }
     }
 
     public void TakeDamage(int damage)
@@ -42,24 +43,16 @@ public class PlayerHealth : MonoBehaviour
         TakeDamage(damage, Vector2.zero);
     }
 
-    void HitFlash()
-    {
-        if (!isFlashing)
-            StartCoroutine(HitFlashRoutine());
-    }
-
     IEnumerator HitFlashRoutine()
     {
         isFlashing = true;
         sr.color = Color.red;
-
         yield return new WaitForSeconds(flashDuration);
-
         sr.color = originalColor;
         isFlashing = false;
     }
 
-    void Knockback(Vector2 dir)
+    void ApplyKnockback(Vector2 dir)
     {
         if (rb == null) return;
 

@@ -11,7 +11,6 @@ public class PlayerMovement : MonoBehaviour
     private PlayerInputActions input;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
-
     private float moveInput;
 
     void Awake()

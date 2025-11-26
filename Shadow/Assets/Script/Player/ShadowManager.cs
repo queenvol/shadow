@@ -17,7 +17,6 @@ public class ShadowManager : MonoBehaviour
     private PlayerInputActions input;
     private Transform clone;
     private Camera cam;
-
     private bool isOnCooldown = false;
     private bool hasSwapped = false;
 
@@ -25,7 +24,6 @@ public class ShadowManager : MonoBehaviour
     {
         input = new PlayerInputActions();
         cam = Camera.main;
-
         input.Player.SummonClone.performed += ctx => TrySummonClone();
     }
 
@@ -57,7 +55,6 @@ public class ShadowManager : MonoBehaviour
             return;
 
         RaycastHit2D bestHit = hits[0];
-
         foreach (RaycastHit2D h in hits)
         {
             if (Mathf.Abs(h.point.y - mouseWorld.y) < Mathf.Abs(bestHit.point.y - mouseWorld.y))
@@ -67,9 +64,7 @@ public class ShadowManager : MonoBehaviour
         }
 
         Vector2 spawnPos = new Vector2(targetX, bestHit.point.y);
-
         clone = Instantiate(clonePrefab, spawnPos, Quaternion.identity).transform;
-
         hasSwapped = false;
 
         StartCoroutine(CloneLifetimeRoutine());
@@ -89,16 +84,11 @@ public class ShadowManager : MonoBehaviour
 
         yield return new WaitForSeconds(summonCooldown);
 
-
         isOnCooldown = false;
     }
 
     public Transform GetClone() => clone;
-
-    public void ClearClone()
-    {
-        clone = null;
-    }
+    public void ClearClone() => clone = null;
 
     public bool HasSwapped() => hasSwapped;
     public void SetHasSwapped(bool value) => hasSwapped = value;

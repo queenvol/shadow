@@ -11,7 +11,6 @@ public class PlayerAttack : MonoBehaviour
     [Header("Slash Point Offsets")]
     public float offsetX = 0.5f;
     public float offsetY = 0.5f;
-
     public float slashDuration = 0.2f;
 
     private PlayerInputActions input;
@@ -22,7 +21,6 @@ public class PlayerAttack : MonoBehaviour
     {
         input = new PlayerInputActions();
         cam = Camera.main;
-
         input.Player.Attack.performed += ctx => DoAttack();
 
         slashPoint = new GameObject("SlashPoint").transform;

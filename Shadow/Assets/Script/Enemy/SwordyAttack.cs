@@ -48,17 +48,16 @@ public class SwordyAttack : MonoBehaviour
     {
         if (player == null) return;
 
-        float horizontalDir = (player.position.x - transform.position.x) >= 0 ? 1f : -1f;
+        float dir = (player.position.x - transform.position.x) >= 0 ? 1f : -1f;
 
-        slashPoint.localPosition = new Vector3(offsetX * horizontalDir, offsetY, 0);
+        slashPoint.localPosition = new Vector3(offsetX * dir, offsetY, 0);
 
         GameObject slash = Instantiate(slashPrefab, slashPoint.position, Quaternion.identity);
-
         slash.transform.SetParent(slashPoint);
 
         SlashEffect effect = slash.GetComponent<SlashEffect>();
-        effect.Setup(horizontalDir);
+        effect.Setup(dir);
 
-        Destroy(slash, effect == null ? 0.2f : 0.2f);
+        Destroy(slash, 0.2f);
     }
 }

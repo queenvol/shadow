@@ -18,8 +18,12 @@ public class SlashEffect : MonoBehaviour
     private float currentAngle;
     private float targetAngle;
 
+    public float AttackDir { get; private set; } = 1f;
+
     public void Setup(float dir)
     {
+        AttackDir = Mathf.Sign(dir) == 0 ? 1f : Mathf.Sign(dir);
+
         if (dir >= 0f)
         {
             currentAngle = rightStartAngle;

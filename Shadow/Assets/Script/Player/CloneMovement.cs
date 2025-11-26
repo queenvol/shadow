@@ -10,13 +10,11 @@ public class CloneMovement : MonoBehaviour
     private PlayerInputActions input;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
-
     private float moveInput;
 
     void Awake()
     {
         input = new PlayerInputActions();
-
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponentInChildren<SpriteRenderer>();
 
@@ -30,7 +28,6 @@ public class CloneMovement : MonoBehaviour
     private void OnMove(InputAction.CallbackContext ctx)
     {
         moveInput = -ctx.ReadValue<float>();
-
         if (moveInput != 0)
             sr.flipX = moveInput < 0;
     }

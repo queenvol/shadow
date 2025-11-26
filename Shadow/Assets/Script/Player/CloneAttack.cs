@@ -9,7 +9,6 @@ public class CloneAttack : MonoBehaviour
     [Header("Slash Offsets")]
     public float offsetX = 0.3f;
     public float offsetY = 0f;
-
     public float slashDuration = 0.2f;
 
     private Transform slashPoint;

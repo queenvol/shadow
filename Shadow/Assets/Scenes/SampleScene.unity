@@ -155,16 +155,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 8
+  flashDuration: 0.1
+  knockbackForce: 3
   moveSpeed: 1.5
   chaseRange: 5
   attackRange: 1.2
   shieldPushForce: 8
   attackCooldown: 1.5
-  flashDuration: 0.1
-  knockbackForce: 3
   shieldBlock: {fileID: 1805887345}
   shieldAttackCollider: {fileID: 1071165968}
-  sr: {fileID: 210418509}
 --- !u!50 &210418507
 Rigidbody2D:
   serializedVersion: 4
@@ -935,7 +934,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clonePrefab: {fileID: 1329438844669829283, guid: fd1cf11ae94924f42805c035c50b68e6, type: 3}
-  summonRadius: 5
+  summonRadius: 10
   groundLayer:
     serializedVersion: 2
     m_Bits: 8

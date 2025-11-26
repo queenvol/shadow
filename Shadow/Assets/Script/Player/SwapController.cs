@@ -10,9 +10,7 @@ public class SwapController : MonoBehaviour
     void Awake()
     {
         input = new PlayerInputActions();
-
         shadowManager = GetComponent<ShadowManager>();
-
         input.Player.Swap.performed += ctx => TrySwap();
     }
 
@@ -23,7 +21,6 @@ public class SwapController : MonoBehaviour
     {
         Transform clone = shadowManager.GetClone();
         if (clone == null) return;
-
         if (shadowManager.HasSwapped()) return;
 
         Vector3 p = transform.position;

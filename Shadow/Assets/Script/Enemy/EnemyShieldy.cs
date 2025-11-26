@@ -2,12 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyShieldy : MonoBehaviour
+public class EnemyShieldy : EnemyBase
 {
-    [Header("Stats")]
-    public int maxHP = 8;
-    private int currentHP;
-
     [Header("Movement")]
     public float moveSpeed = 1.5f;
     public float chaseRange = 5f;
@@ -16,32 +12,25 @@ public class EnemyShieldy : MonoBehaviour
     [Header("Attack")]
     public float shieldPushForce = 10f;
     public float attackCooldown = 1.5f;
-    private bool canAttack = true;
-
-    [Header("Hit Feedback")]
-    public float flashDuration = 0.1f;
-    public float knockbackForce = 3f;
 
     [Header("References")]
     public BoxCollider2D shieldBlock;
     public BoxCollider2D shieldAttackCollider;
-    public SpriteRenderer sr;
 
     private Transform player;
-    private Rigidbody2D rb;
-    private Color originalColor;
-
     private bool facingRight = true;
-    private bool isFlashing = false;
+    private bool canAttack = true;
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
 
     void Start()
     {
-        currentHP = maxHP;
-        rb = GetComponent<Rigidbody2D>();
-        originalColor = sr.color;
-
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        shieldAttackCollider.enabled = false;
+        if (shieldAttackCollider != null)
+            shieldAttackCollider.enabled = false;
     }
 
     void Update()
@@ -49,7 +38,6 @@ public class EnemyShieldy : MonoBehaviour
         if (player == null) return;
 
         float distance = Vector2.Distance(transform.position, player.position);
-
         FlipToPlayer();
 
         if (distance > chaseRange)
@@ -88,24 +76,25 @@ public class EnemyShieldy : MonoBehaviour
     {
         float facing = Mathf.Sign(transform.right.x);
         float attackSide = Mathf.Sign(attackDir.x);
-
         return facing == attackSide;
     }
 
-    public void TakeDamage(int damage, Vector2 attackDir)
+    public override void TakeDamage(int damage, Vector2 attackDir)
     {
-        currentHP -= damage;
+        attackDir = new Vector2(attackDir.x, 0f);
 
-        HitFlash();
-        Knockback(attackDir);
+        if (IsFrontBlocked(attackDir))
+        {
+            ShieldBlockFeedback();
+            return;
+        }
 
-        if (currentHP <= 0)
-            Die();
+        base.TakeDamage(damage, attackDir);
     }
 
     void ShieldBlockFeedback()
     {
-        if (!isFlashing)
+        if (!isFlashing && sr != null)
             StartCoroutine(BlockFlashRoutine());
     }
 
@@ -113,7 +102,7 @@ public class EnemyShieldy : MonoBehaviour
     {
         isFlashing = true;
         sr.color = Color.yellow;
-        yield return new WaitForSeconds(0.10f);
+        yield return new WaitForSeconds(flashDuration);
         sr.color = originalColor;
         isFlashing = false;
     }
@@ -136,7 +125,8 @@ public class EnemyShieldy : MonoBehaviour
             yield return null;
         }
 
-        shieldAttackCollider.enabled = true;
+        if (shieldAttackCollider != null)
+            shieldAttackCollider.enabled = true;
 
         float forwardDist = 0.35f;
         Vector3 forwardTarget = originalPos + new Vector3(dir * forwardDist, 0, 0);
@@ -151,7 +141,8 @@ public class EnemyShieldy : MonoBehaviour
 
         yield return new WaitForSeconds(0.05f);
 
-        shieldAttackCollider.enabled = false;
+        if (shieldAttackCollider != null)
+            shieldAttackCollider.enabled = false;
 
         t = 0;
         while (t < 1)
@@ -163,31 +154,5 @@ public class EnemyShieldy : MonoBehaviour
 
         yield return new WaitForSeconds(attackCooldown);
         canAttack = true;
-    }
-
-    void HitFlash()
-    {
-        if (!isFlashing)
-            StartCoroutine(HitFlashRoutine());
-    }
-
-    IEnumerator HitFlashRoutine()
-    {
-        isFlashing = true;
-        sr.color = Color.red;
-        yield return new WaitForSeconds(flashDuration);
-        sr.color = originalColor;
-        isFlashing = false;
-    }
-
-    void Knockback(Vector2 dir)
-    {
-        rb.velocity = Vector2.zero;
-        rb.AddForce(dir.normalized * knockbackForce, ForceMode2D.Impulse);
-    }
-
-    void Die()
-    {
-        Destroy(gameObject);
     }
 }
