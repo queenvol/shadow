@@ -24,13 +24,13 @@ public class ShadowManager : MonoBehaviour
     {
         input = new PlayerInputActions();
         cam = Camera.main;
-        input.Player.SummonClone.performed += ctx => TrySummonClone();
+        input.Player.SummonClone.performed += ctx => TryTeleportAndCreateClone();
     }
 
     void OnEnable() => input.Player.Enable();
     void OnDisable() => input.Player.Disable();
 
-    void TrySummonClone()
+    void TryTeleportAndCreateClone()
     {
         if (isOnCooldown || clone != null)
             return;
@@ -63,9 +63,14 @@ public class ShadowManager : MonoBehaviour
             }
         }
 
-        Vector2 spawnPos = new Vector2(targetX, bestHit.point.y);
-        clone = Instantiate(clonePrefab, spawnPos, Quaternion.identity).transform;
+        Vector2 targetPos = new Vector2(targetX, bestHit.point.y);
+
+        Vector3 oldPlayerPos = transform.position;
+        clone = Instantiate(clonePrefab, oldPlayerPos, Quaternion.identity).transform;
+
         hasSwapped = false;
+
+        transform.position = targetPos;
 
         StartCoroutine(CloneLifetimeRoutine());
     }

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1754738500751579045}
   - component: {fileID: 1279986066879153177}
   - component: {fileID: 1869006607684122111}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Swordy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65bf0a5193bd9cc4391e7497ae3625c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 5
+  maxHP: 2
   flashDuration: 0.1
   knockbackForce: 3
   moveSpeed: 2
